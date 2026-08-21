@@ -28,6 +28,12 @@ jobs:
           cache: npm
       - run: rm -f package-lock.json && npm install
       - run: npm run build
+      - name: Normalize project-page assets
+        run: |
+          if [ -d dist/client/happo-express-web/_next ]; then
+            mv dist/client/happo-express-web/_next dist/client/_next
+            rmdir dist/client/happo-express-web
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
